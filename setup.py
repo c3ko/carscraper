@@ -7,7 +7,7 @@ setup(
 
     author="Mo. K",
 
-    packages=["scrapy"],
+    packages=["car_scraper"],
 
     install_requires=[
         'scrapy>=1.5'

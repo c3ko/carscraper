@@ -13,9 +13,14 @@ BOT_NAME = 'car_scraper'
 
 SPIDER_MODULES = ['car_scraper.spiders']
 NEWSPIDER_MODULE = 'car_scraper.spiders'
-ITEM_PIPELINES = {'car_scraper.pipelines.KijijiPipeline': 1}
+#ITEM_PIPELINES = {'car_scraper.pipelines.KijijiPipeline': 1}
+ITEM_PIPELINES = {'car_scraper.pipelines.SQLAlchemyPipeline': 1}
 
+DATABASE = {
+    'drivername': 'sqlite',
+    'database': 'scraped-cars.db'
 
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'car_scraper (+http://www.yourdomain.com)'

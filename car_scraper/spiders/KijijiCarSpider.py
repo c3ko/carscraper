@@ -32,12 +32,15 @@ class KijijiSpider(CrawlSpider):
         item['year'] = page_response.xpath('//dd[@itemprop="vehicleModelDate"]/text()').extract_first()
         item['make'] = page_response.xpath('//dd[@itemprop="brand"]/text()').extract_first()
         item['model'] = page_response.xpath('//dd[@itemprop="model"]/text()').extract_first()
-        item['full_name'] = page_response.xpath('//h1[@itemprop="name"]/text()').extract_first()
         mileage = page_response.xpath('//dd[@itemprop="mileageFromOdometer"]/text()').extract_first()
         item['mileage'] = str(mileage).replace(',', '')
+        item['transmission'] = page_response.xpath('//dd[@itemprop="vehicleTransmission"]/text()').extract_first()
         item['location'] = page_response.xpath('//span[@itemprop="address"]/text()').extract_first()
         price = page_response.xpath('//span[@itemprop="price"]/text()').extract_first()
         item['price'] = str(price).replace('$', '').replace(',', '')
-        item['date_posted'] = page_response.xpath('//time/@datetime').extract_first()
+        #remove last 5 characters i.e timezone '.000Z' from datetime
+        item['date_posted'] = page_response.xpath('//time/@datetime').extract_first()[:-5]
+        item['full_name'] = page_response.xpath('//h1[@itemprop="name"]/text()').extract_first()
+        item['description'] = page_response.xpath('//div[@itemprop="description"]/text()').extract_first()
         item['link'] = page_response.url
         yield item

@@ -8,15 +8,16 @@
 
 from scrapy.item import Item, Field
 
-
 class CarItem(Item):
     make = Field()
     model = Field()
     year = Field()
-    full_name = Field()
+    transmission = Field()
+    mileage = Field()
     price = Field()
     location = Field()
-    mileage = Field()
+    full_name = Field()
+    description = Field()
     date_posted = Field()
     link = Field()
 

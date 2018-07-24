@@ -18,7 +18,7 @@ ITEM_PIPELINES = {'car_scraper.pipelines.SQLAlchemyPipeline': 1}
 
 DATABASE = {
     'drivername': 'sqlite',
-    'database': 'scraped-cars.db'
+    'database': 'car_scraper/scraped-cars.db'
 
 }
 

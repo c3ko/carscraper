@@ -133,7 +133,6 @@ class SQLAlchemyPipeline(object):
         return pipeline
 
     def create_engine(self):
-        print(self.DB['database'] + '---------------------------------------------------------------------------------------------')
         db_engine = create_engine(URL(**self.DB), poolclass=NullPool)
         return db_engine
     
@@ -142,7 +141,6 @@ class SQLAlchemyPipeline(object):
         """
             When signalled from spider, creates engines, sessions and tables (if not already existing).
         """
-        print("*************************************Spider On has been called")
         engine = self.create_engine()
         # checkfirst ensures that tables are created if they don't exist
         DeclarativeBase.metadata.create_all(engine, checkfirst=True)

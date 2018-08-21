@@ -13,7 +13,7 @@ from datetime import datetime
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, relationship
 from sqlalchemy.pool import NullPool
 
 from scrapy import signals
@@ -29,6 +29,7 @@ DeclarativeBase = declarative_base()
 class CarAd(DeclarativeBase):
     __tablename__ = 'car_ad'
     id = Column(Integer, primary_key=True)
+    saved_car_rel = relationship('SavedCar', back_populates='save_id')
     make = Column(String(50))
     model = Column(String(50))
     year = Column(Integer)

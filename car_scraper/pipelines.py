@@ -22,14 +22,13 @@ from scrapy.utils.project import get_project_settings
 from sqlalchemy import Column, String, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
-
 DeclarativeBase = declarative_base()
 
 
 class CarAd(DeclarativeBase):
     __tablename__ = 'car_ad'
     id = Column(Integer, primary_key=True)
-    saved_car_rel = relationship('SavedCar', back_populates='save_id')
+    saved_car_rel = relationship('SavedCar', back_populates='car_rel')
     make = Column(String(50))
     model = Column(String(50))
     year = Column(Integer)

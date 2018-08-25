@@ -19,7 +19,7 @@ from sqlalchemy.pool import NullPool
 from scrapy import signals
 from scrapy.utils.project import get_project_settings
 
-from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy import ForeignKey, Column, String, Integer, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 DeclarativeBase = declarative_base()
@@ -61,8 +61,30 @@ class CarAd(DeclarativeBase):
         return (f'{self.full_name}')
     
 
+class SavedCar(DeclarativeBase):
+    __tablename__ = 'saved_cars'
+    #__table_args__ = {'extend_existing': True} 
+
+    id = Column(Integer, primary_key=True)
+    car_id = Column(Integer, ForeignKey('car_ad.id'))
+    car_rel = relationship('CarAd', back_populates='saved_car_rel')
+    save_id = Column(Integer, ForeignKey('saved_searches.id'))
+    save_search_rel = relationship('SavedSearch', back_populates='saved_car_rel')
+
 log = logging.getLogger(__name__)
 
+class SavedSearch(DeclarativeBase):
+    __tablename__ = 'saved_searches'
+    #__table_args__ = {'extend_existing': True} 
+
+    id = Column(Integer, primary_key=True)
+    saved_car_rel = relationship('SavedCar', back_populates='save_search_rel')
+    name = Column(String)
+    date = Column(DateTime)
+    num_saved = Column(Integer)
+
+    def __repr__(self):
+        return 'SavedSearch: ' + self.name
 
 '''
 class KijijiPipeline(object):
